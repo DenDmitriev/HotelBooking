@@ -11,6 +11,14 @@
 		9575651D2B2B7E0100415531 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575651C2B2B7E0100415531 /* ContentView.swift */; };
 		9575651F2B2B7E0300415531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9575651E2B2B7E0300415531 /* Assets.xcassets */; };
 		957565222B2B7E0300415531 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957565212B2B7E0300415531 /* Preview Assets.xcassets */; };
+		9575652A2B2B7F5400415531 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957565292B2B7F5400415531 /* Hotel.swift */; };
+		9575652C2B2B7FAE00415531 /* PlaceholderHotel.json in Resources */ = {isa = PBXBuildFile; fileRef = 9575652B2B2B7FAE00415531 /* PlaceholderHotel.json */; };
+		957565312B2B815800415531 /* HotelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957565302B2B815800415531 /* HotelService.swift */; };
+		957565332B2B81AA00415531 /* HotelServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957565322B2B81AA00415531 /* HotelServiceError.swift */; };
+		957565352B2B871800415531 /* PlaceholderRooms.json in Resources */ = {isa = PBXBuildFile; fileRef = 957565342B2B871800415531 /* PlaceholderRooms.json */; };
+		957565372B2B899D00415531 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957565362B2B899D00415531 /* Room.swift */; };
+		957565392B2B8BDE00415531 /* PlaceholderBooking.json in Resources */ = {isa = PBXBuildFile; fileRef = 957565382B2B8BDD00415531 /* PlaceholderBooking.json */; };
+		9575653B2B2B8BEB00415531 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575653A2B2B8BEB00415531 /* Booking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		9575651C2B2B7E0100415531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9575651E2B2B7E0300415531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		957565212B2B7E0300415531 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		957565292B2B7F5400415531 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
+		9575652B2B2B7FAE00415531 /* PlaceholderHotel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PlaceholderHotel.json; sourceTree = "<group>"; };
+		957565302B2B815800415531 /* HotelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelService.swift; sourceTree = "<group>"; };
+		957565322B2B81AA00415531 /* HotelServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelServiceError.swift; sourceTree = "<group>"; };
+		957565342B2B871800415531 /* PlaceholderRooms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PlaceholderRooms.json; sourceTree = "<group>"; };
+		957565362B2B899D00415531 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		957565382B2B8BDD00415531 /* PlaceholderBooking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PlaceholderBooking.json; sourceTree = "<group>"; };
+		9575653A2B2B8BEB00415531 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +69,9 @@
 			children = (
 				9575651A2B2B7E0100415531 /* HotelBookingApp.swift */,
 				9575651C2B2B7E0100415531 /* ContentView.swift */,
-				9575651E2B2B7E0300415531 /* Assets.xcassets */,
+				9575653C2B2B8E0500415531 /* Flow */,
+				957565282B2B7F4100415531 /* Model */,
+				9575653D2B2B8E4400415531 /* SupportingFiles */,
 				957565202B2B7E0300415531 /* Preview Content */,
 			);
 			path = HotelBooking;
@@ -65,6 +83,68 @@
 				957565212B2B7E0300415531 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		957565282B2B7F4100415531 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9575652E2B2B813300415531 /* Services */,
+				9575652D2B2B811400415531 /* Entities */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9575652D2B2B811400415531 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				957565292B2B7F5400415531 /* Hotel.swift */,
+				957565362B2B899D00415531 /* Room.swift */,
+				9575653A2B2B8BEB00415531 /* Booking.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		9575652E2B2B813300415531 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9575652F2B2B813900415531 /* HotelService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9575652F2B2B813900415531 /* HotelService */ = {
+			isa = PBXGroup;
+			children = (
+				957565302B2B815800415531 /* HotelService.swift */,
+				957565322B2B81AA00415531 /* HotelServiceError.swift */,
+			);
+			path = HotelService;
+			sourceTree = "<group>";
+		};
+		9575653C2B2B8E0500415531 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				9575653E2B2B8E5E00415531 /* Hotels */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		9575653D2B2B8E4400415531 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				9575651E2B2B7E0300415531 /* Assets.xcassets */,
+				9575652B2B2B7FAE00415531 /* PlaceholderHotel.json */,
+				957565342B2B871800415531 /* PlaceholderRooms.json */,
+				957565382B2B8BDD00415531 /* PlaceholderBooking.json */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		9575653E2B2B8E5E00415531 /* Hotels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Hotels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +205,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957565352B2B871800415531 /* PlaceholderRooms.json in Resources */,
+				957565392B2B8BDE00415531 /* PlaceholderBooking.json in Resources */,
 				957565222B2B7E0300415531 /* Preview Assets.xcassets in Resources */,
+				9575652C2B2B7FAE00415531 /* PlaceholderHotel.json in Resources */,
 				9575651F2B2B7E0300415531 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,7 +220,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9575652A2B2B7F5400415531 /* Hotel.swift in Sources */,
+				957565332B2B81AA00415531 /* HotelServiceError.swift in Sources */,
+				9575653B2B2B8BEB00415531 /* Booking.swift in Sources */,
+				957565372B2B899D00415531 /* Room.swift in Sources */,
 				9575651D2B2B7E0100415531 /* ContentView.swift in Sources */,
+				957565312B2B815800415531 /* HotelService.swift in Sources */,
 				9575651B2B2B7E0100415531 /* HotelBookingApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
