@@ -37,3 +37,28 @@ extension Hotel {
         let peculiarities: [String]
     }
 }
+
+extension Hotel {
+    init() {
+        self.id = .zero
+        self.name = ""
+        self.adress = ""
+        self.minimalPrice = .zero
+        self.priceForIt = ""
+        self.rating = .zero
+        self.ratingName = ""
+        self.imageUrls = []
+        self.aboutTheHotel = .init(description: "", peculiarities: [])
+    }
+    
+    static var placeholder: Self {
+        guard let url = Bundle.main.url(forResource: "PlaceholderHotel", withExtension: "json") else { return .init() }
+        do {
+            let data = try Data(contentsOf: url)
+            let hotel = try JSONDecoder().decode(Hotel.self, from: data)
+            return hotel
+        } catch {
+            return .init()
+        }
+    }
+}
