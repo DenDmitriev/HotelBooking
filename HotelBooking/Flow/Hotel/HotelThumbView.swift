@@ -15,10 +15,7 @@ struct HotelThumbView: View {
     
     var body: some View {
         VStack(spacing: AppGrid.pt16) {
-//            Text("Отель")
-//                .font(AppFonts.headline1)
-            
-            HotelImageSlider(imageURLs: hotel.imageUrls, selection: $selectionImage)
+            ImageSlider(imageURLs: hotel.imageUrls, selection: $selectionImage)
             
             HotelBudge(rating: hotel.rating, ratingName: hotel.ratingName)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -36,18 +33,9 @@ struct HotelThumbView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(alignment: .firstTextBaseline) {
-                Text("от " + hotel.minimalPrice.formatted(.price))
-                    .font(AppFonts.title1)
-                
-                Text(hotel.priceForIt.lowercased())
-                    .font(AppFonts.regular)
-                    .foregroundStyle(AppColors.grayOne)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            PriceDescriptorView(price: hotel.minimalPrice, descriptor: hotel.priceForIt, rule: .from)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-//        .padding(.top, safeAreaInsets.top)
-//        .padding(.top, -AppGrid.pt8)
         .padding(AppGrid.pt16)
         .background(.background)
         .cornerRadius(AppGrid.pt12)

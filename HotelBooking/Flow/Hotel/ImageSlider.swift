@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HotelImageSlider: View {
+struct ImageSlider: View {
     let imageURLs: [String]
     @Binding var selection: Int
     @State private var size: CGSize = .zero
@@ -74,5 +74,5 @@ struct HotelImageSlider: View {
 }
 
 #Preview("HotelImageSlider") {
-    HotelImageSlider(imageURLs: Hotel.placeholder.imageUrls, selection: .constant(.zero))
+    ImageSlider(imageURLs: Hotel.placeholder.imageUrls, selection: .constant(.zero))
 }

@@ -28,3 +28,16 @@ struct Room: Codable, Identifiable {
         case imageUrls = "image_urls"
     }
 }
+
+extension Array<Room> {
+    static var placeholder: Self {
+        guard let url = Bundle.main.url(forResource: "PlaceholderRooms", withExtension: "json") else { return [] }
+        do {
+            let data = try Data(contentsOf: url)
+            let result = try JSONDecoder().decode(Rooms.self, from: data)
+            return result.rooms
+        } catch {
+            return []
+        }
+    }
+}

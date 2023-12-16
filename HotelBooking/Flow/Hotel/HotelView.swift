@@ -11,6 +11,7 @@ struct HotelView: View {
     
     let hotel: Hotel
     @Environment(\.safeAreaInsets) private var safeAreaInsets
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
@@ -30,14 +31,35 @@ struct HotelView: View {
                 }
                 
                 
-                NavigationButton(title: "К выбору номера", destination: EmptyView())
-                    .padding(AppGrid.pt16)
-                    .background(.background)
-                    .border(width: AppGrid.pt1, edges: [.top], color: AppColors.seporator)
+                NavigationButton(
+                    title: "К выбору номера",
+                    destination: RoomsView(rooms: .placeholder)
+                        .navigationTitle(
+                            Text(hotel.name)
+                        )
+                )
+                .padding(AppGrid.pt16)
+                .background(.background)
+                .border(width: AppGrid.pt1, edges: [.top], color: AppColors.seporator)
             }
-            .navigationTitle("Отель")
+            .navigationTitle(
+                Text("Отель")
+            )
             .navigationBarTitleDisplayMode(.inline)
+//            .navigationBarBackButtonHidden(true)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        dismiss()
+//                    } label: {
+//                        Image(systemName: "chevron.left")
+//                            .padding(.leading, AppGrid.pt8)
+//                            .fontWeight(.medium)
+//                    }
+//                }
+//            }
         }
+        .accentColor(.primary)
     }
 }
 
