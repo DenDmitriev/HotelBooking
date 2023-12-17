@@ -12,7 +12,10 @@ struct PriceFormatStyle: FormatStyle {
     typealias FormatOutput = String
     
     func format(_ value: Int) -> String {
-        value.formatted(.number) + " " + "₽"
+        guard let formatted = AppFormatter.currencyFormatter.string(from: value as NSNumber)
+        else { return "\(value.formatted(.number)) ₽" }
+        
+        return formatted
     }
 }
 

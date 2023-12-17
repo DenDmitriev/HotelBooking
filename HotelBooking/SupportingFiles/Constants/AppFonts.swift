@@ -13,5 +13,7 @@ struct AppFonts {
     static let title2: Font = Font.system(size: 22).weight(.medium)
     static let headline2: Font = Font.system(size: 16).weight(.medium)
     static let caption1: Font = Font.system(size: 14).weight(.medium)
+    static let regular3: Font = Font.system(size: 17).weight(.regular)
     static let regular: Font = Font.system(size: 16).weight(.regular)
+    static let regular2: Font = Font.system(size: 14).weight(.regular)
 }

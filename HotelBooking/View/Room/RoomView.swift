@@ -28,7 +28,8 @@ struct RoomView: View {
             PriceDescriptorView(price: room.price, descriptor: room.pricePer)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            NavigationButton(title: "Выбрать номер", destination: EmptyView())
+            NavigationButton(title: "Выбрать номер",
+                             destination: BookingView(booking: .placeholder))
         }
         .padding(AppGrid.pt16)
         .background(.background)

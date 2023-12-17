@@ -24,6 +24,24 @@ struct Booking: Codable, Identifiable {
     let fuelCharge: Int
     let serviceCharge: Int
     
+    init() {
+        self.id = .zero
+        self.hotelName = ""
+        self.hotelAdress = ""
+        self.horating = .zero
+        self.ratingName = ""
+        self.departure = ""
+        self.arrivalCountry = ""
+        self.tourDateStart = Date()
+        self.tourDateStop = Date()
+        self.numberOfNights = .zero
+        self.room = ""
+        self.nutrition = ""
+        self.tourPrice = .zero
+        self.fuelCharge = .zero
+        self.serviceCharge = .zero
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case hotelName = "hotel_name"
@@ -40,5 +58,22 @@ struct Booking: Codable, Identifiable {
         case tourPrice = "tour_price"
         case fuelCharge = "fuel_charge"
         case serviceCharge = "service_charge"
+    }
+}
+
+extension Booking {
+    static var placeholder: Self {
+        guard let url = Bundle.main.url(forResource: "PlaceholderBooking", withExtension: "json") else { return .init() }
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.yyyy"
+            decoder.dateDecodingStrategy = .formatted(formatter)
+            let booking = try decoder.decode(Booking.self, from: data)
+            return booking
+        } catch {
+            return .init()
+        }
     }
 }

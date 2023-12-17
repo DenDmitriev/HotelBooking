@@ -12,6 +12,7 @@ struct HotelView: View {
     let hotel: Hotel
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Environment(\.dismiss) private var dismiss
+    @State private var bottomSize: CGSize = .zero
     
     var body: some View {
         NavigationView {
@@ -23,13 +24,11 @@ struct HotelView: View {
                             .padding(.bottom, -AppGrid.pt8)
                         
                         HotelAboutView(hotel: hotel)
-                        
-                        Spacer()
-                            .frame(height: AppGrid.pt64)
+                            .padding(.bottom, bottomSize.height)
                     }
+                    .padding(.bottom, AppGrid.pt8)
                     .background(AppColors.backgroundList)
                 }
-                
                 
                 NavigationButton(
                     title: "К выбору номера",
@@ -41,23 +40,14 @@ struct HotelView: View {
                 .padding(AppGrid.pt16)
                 .background(.background)
                 .border(width: AppGrid.pt1, edges: [.top], color: AppColors.seporator)
+                .padding(.bottom, AppGrid.pt12)
+                .readSize { size in
+                    bottomSize = size
+                }
             }
-            .navigationTitle(
-                Text("Отель")
-            )
+            .navigationTitle("Отель")
             .navigationBarTitleDisplayMode(.inline)
-//            .navigationBarBackButtonHidden(true)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button {
-//                        dismiss()
-//                    } label: {
-//                        Image(systemName: "chevron.left")
-//                            .padding(.leading, AppGrid.pt8)
-//                            .fontWeight(.medium)
-//                    }
-//                }
-//            }
+            .ignoresSafeArea(edges: .bottom)
         }
         .accentColor(.primary)
     }

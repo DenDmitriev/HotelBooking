@@ -65,7 +65,7 @@ final class HotelService {
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
             let formatter = DateFormatter()
-            formatter.dateFormat = "DD.MM.YYYY"
+            formatter.dateFormat = "dd.MM.yyyy"
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .formatted(formatter)
             let result = try decoder.decode(Booking.self, from: data)

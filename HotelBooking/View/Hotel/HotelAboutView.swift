@@ -18,7 +18,7 @@ struct HotelAboutView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             TagsView(tags: hotel.aboutTheHotel.peculiarities)
-                .padding(-AppGrid.pt4)
+                .padding(-AppGrid.pt8)
             
             Text(hotel.aboutTheHotel.description)
                 .padding(.top, -AppGrid.pt4)

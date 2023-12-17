@@ -48,6 +48,7 @@ struct AppGrid {
     static let pt104: CGFloat = 104
     static let pt112: CGFloat = 112
     static let pt120: CGFloat = 120
+    static let pt124: CGFloat = 124
     static let pt128: CGFloat = 128
     static let pt136: CGFloat = 136
     static let pt144: CGFloat = 144
