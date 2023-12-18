@@ -13,6 +13,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow back")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow back")
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -AppGrid.pt168, vertical: 0), for:UIBarMetrics.default)
+        UIToolbar.appearance().barTintColor = UIColor.systemBackground
         return true
     }
 }

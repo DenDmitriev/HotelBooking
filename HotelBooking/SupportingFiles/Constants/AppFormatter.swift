@@ -10,8 +10,8 @@ import Foundation
 struct AppFormatter {
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "RU-ru")
-        dateFormatter.dateFormat = "dd.MM.YYYY"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter
     }()
     

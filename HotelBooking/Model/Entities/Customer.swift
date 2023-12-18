@@ -7,7 +7,15 @@
 
 import Foundation
 
-struct Customer {
-    let phone: String
-    let email: String
+struct Customer: Validatable {
+    var phone: String = ""
+    var email: String = ""
+    
+    func isValid() -> Bool {
+        var validationable = Set<Bool>()
+        validationable.insert(phone.isPhone)
+        validationable.insert(email.isEmail)
+        
+        return validationable.isValid
+    }
 }

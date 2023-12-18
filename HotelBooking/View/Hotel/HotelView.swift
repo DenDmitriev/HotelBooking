@@ -15,39 +15,33 @@ struct HotelView: View {
     @State private var bottomSize: CGSize = .zero
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .bottom) {
-                ScrollView {
-                    VStack(spacing: AppGrid.pt8) {
-                        HotelThumbView(hotel: hotel)
-                            .offset(y: -AppGrid.pt8)
-                            .padding(.bottom, -AppGrid.pt8)
-                        
-                        HotelAboutView(hotel: hotel)
-                            .padding(.bottom, bottomSize.height)
-                    }
-                    .padding(.bottom, AppGrid.pt8)
-                    .background(AppColors.backgroundList)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: AppGrid.pt8) {
+                    HotelThumbView(hotel: hotel)
+                        .offset(y: -AppGrid.pt8)
+                        .padding(.bottom, -AppGrid.pt8)
+                    
+                    HotelAboutView(hotel: hotel)
+                        .padding(.bottom, bottomSize.height)
                 }
-                
-                NavigationButton(
-                    title: "К выбору номера",
-                    destination: RoomsView(rooms: .placeholder)
-                        .navigationTitle(
-                            Text(hotel.name)
-                        )
-                )
-                .padding(AppGrid.pt16)
-                .background(.background)
-                .border(width: AppGrid.pt1, edges: [.top], color: AppColors.seporator)
-                .padding(.bottom, AppGrid.pt12)
-                .readSize { size in
-                    bottomSize = size
+                .padding(.bottom, AppGrid.pt8)
+                .background(AppColors.backgroundList)
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationButton(
+                        title: "К выбору номера",
+                        destination: RoomsView(rooms: .placeholder)
+                            .navigationTitle(
+                                Text(hotel.name)
+                            )
+                    )
+                    .padding(.top, AppGrid.pt16)
                 }
             }
             .navigationTitle("Отель")
             .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea(edges: .bottom)
         }
         .accentColor(.primary)
     }

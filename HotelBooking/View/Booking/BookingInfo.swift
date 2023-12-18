@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookingInfoView: View {
+struct BookingInfo: View {
     
     let booking: Booking
     
@@ -18,25 +18,25 @@ struct BookingInfoView: View {
     
     var body: some View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: AppGrid.pt16, content: {
-            key(text: "Вылет из")
+            title(text: "Вылет из")
             value(text: booking.departure)
             
-            key(text: "Страна, город")
+            title(text: "Страна, город")
             value(text: booking.arrivalCountry)
             
-            key(text: "Даты")
+            title(text: "Даты")
             valueDates(start: booking.tourDateStart, end: booking.tourDateStop)
             
-            key(text: "Кол-во ночей")
+            title(text: "Кол-во ночей")
             value(text: booking.numberOfNights.formatted())
             
-            key(text: "Отель")
+            title(text: "Отель")
             value(text: booking.hotelName)
             
-            key(text: "Номер")
+            title(text: "Номер")
             value(text: booking.room)
             
-            key(text: "Питание")
+            title(text: "Питание")
             value(text: booking.nutrition)
         })
         .padding(AppGrid.pt16)
@@ -44,7 +44,7 @@ struct BookingInfoView: View {
         .cornerRadius(AppGrid.pt15)
     }
     
-    func key(text: String) -> some View {
+    func title(text: String) -> some View {
         Text(text)
             .font(AppFonts.regular)
             .foregroundStyle(AppColors.grayOne)
@@ -65,5 +65,5 @@ struct BookingInfoView: View {
 }
 
 #Preview {
-    BookingInfoView(booking: .placeholder)
+    BookingInfo(booking: .placeholder)
 }

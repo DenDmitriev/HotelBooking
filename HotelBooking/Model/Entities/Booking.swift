@@ -59,6 +59,12 @@ struct Booking: Codable, Identifiable {
         case fuelCharge = "fuel_charge"
         case serviceCharge = "service_charge"
     }
+    
+    func totalPrice() -> Int {
+        tourPrice
+        + fuelCharge
+        + serviceCharge
+    }
 }
 
 extension Booking {

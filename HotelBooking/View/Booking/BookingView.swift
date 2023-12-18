@@ -10,107 +10,91 @@ import SwiftUI
 struct BookingView: View {
     
     let booking: Booking
-    @State var customer: Customer? = nil
-    @State var tourists: [Tourist] = []
+    @State var customer: Customer = .init()
+    @State var tourists: [Tourist] = [Tourist(id: 0)]
     
-    @State private var email: String = ""
-    @State private var isEmailValid: Bool?
-    
-    @State private var phone: String = ""
-    @State private var isEmailPhone: Bool?
+    @State private var isCustomerValid: Bool?
     
     @State private var touristCount: Int = 1
     @State private var firstTouristISValid: Bool = false
     
     @State private var isAllValid: Bool = false
     
-    @State private var bottomSize: CGSize = .zero
-    
     private var validationables: Set<Bool?> {
-        [isEmailValid, isEmailPhone, firstTouristISValid]
+        [isCustomerValid, firstTouristISValid]
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ScrollViewReader { scrollReader in
             ScrollView {
                 LazyVStack(spacing: AppGrid.pt8) {
                     BookingHotel(booking: booking)
                     
-                    BookingInfoView(booking: booking)
+                    BookingInfo(booking: booking)
                     
-                    CustomerPersonalInfoView(
-                        email: $email, isEmailValid: $isEmailValid,
-                        phone: $phone, isPhoneValid: $isEmailPhone
-                    )
+                    CustomerForm(customer: $customer, isValid: $isCustomerValid)
                     
                     LazyVStack {
-                        ForEach(1...touristCount, id: \.self) { index in
-                            TouristView(
-                                tourist: touristWrapper(id: index),
-                                isAllValid: index == 1 ? $firstTouristISValid : .constant(true),
-                                number: index
+                        ForEach(0...tourists.index(before: touristCount), id: \.self) { index in
+                            TouristForm(
+                                tourist: touristWrapper(tourist: tourists.first(where: { $0.id == index }) ?? Tourist(id: index)),
+                                isValid: index == 0 ? $firstTouristISValid : .constant(true),
+                                number: index,
+                                scrollReader: scrollReader
                             )
                         }
                     }
                     
                     AddTouristView(touristCount: $touristCount)
-                        .padding(.bottom, bottomSize.height)
+                    
+                    InvoiceView(
+                        tourPrice: booking.tourPrice,
+                        fuelCharge: booking.fuelCharge,
+                        serviceCharge: booking.serviceCharge,
+                        totalPrice: booking.totalPrice()
+                    )
                 }
+                .padding(.vertical, AppGrid.pt8)
+                .background(AppColors.backgroundList)
             }
-            .padding(.vertical, AppGrid.pt8)
-            .background(AppColors.backgroundList)
-            
-            NavigationButton(title: "Оплатить", destination: EmptyView()) {
-                print("Pay did tap")
-                customer = Customer(phone: phone, email: email)
-            }
-            .disabled(!isAllValid)
-            .padding(AppGrid.pt16)
-            .padding(.bottom, AppGrid.pt12)
-            .background(.background)
-            .border(width: AppGrid.pt1, edges: [.top], color: AppColors.seporator)
-            .readSize { size in
-                bottomSize = size
-            }
-            .onChange(of: validationables) {
-                isAllValid = validationables.isValid
-            }
+            .keyboardAvoiding(offset: AppGrid.pt32)
         }
-        .ignoresSafeArea(edges: .bottom)
+        .toolbar(content: {
+            ToolbarItem(placement: .bottomBar) {
+                NavigationButton(
+                    title: "Оплатить \(booking.totalPrice().formatted(.price))",
+                    destination: EmptyView()) {
+                        print("Pay did tap")
+                        print("---Customer---")
+                        print("👨‍💻", customer.isValid() ? customer : "customer not valid")
+                        print("---Tourists---")
+                        print("🧳", tourists.isValids)
+                    }
+                    .disabled(!isAllValid)
+                    .padding(.top, AppGrid.pt16)
+                    .onChange(of: validationables) {
+                        isAllValid = validationables.isValid
+                    }
+            }
+        })
         .navigationTitle("Бронирование")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.pink, for: .bottomBar)
+        
     }
     
-    private func touristWrapper(id: Int) -> Binding<Tourist> {
-        let tourist = Binding<Tourist>(
-            get: { .init(id: id) },
+    private func touristWrapper(tourist: Tourist) -> Binding<Tourist> {
+        Binding<Tourist>(
+            get: { tourist },
             set: { tourist in
-                guard tourist.isValid() else { return }
-                if let index = tourists.firstIndex(where: { $0.id == id }) {
+                if let index = tourists.firstIndex(where: { $0.id == tourist.id }) {
                     tourists[index] = tourist
+                    print(tourists[index] )
                 } else {
                     tourists.append(tourist)
                 }
             }
         )
-        
-        return tourist
-    }
-    
-    private func readTourists() {
-        //        Array(1...touristCount).forEach { index in
-        //            tourists.append(
-        //                Tourist(
-        //                    id: index,
-        //                    name: <#T##String#>,
-        //                    surname: <#T##String#>,
-        //                    dateOfBirth: <#T##Date#>,
-        //                    citizenship: <#T##String#>,
-        //                    internationalPassport: <#T##String#>,
-        //                    internationalPassportEndDate: <#T##Date#>
-        //                )
-        //            )
-        //        }
     }
 }
 

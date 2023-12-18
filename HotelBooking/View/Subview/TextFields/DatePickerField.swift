@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct DateTextField: View {
+struct DatePickerField: View {
     
     let placeholder: String
     @Binding var date: Date?
-    let initialDate: Date? //AppCalendar.calendar.date(from: DateComponents(year: 2000, month: 1, day: 1)) ?? Date.now
+    let initialDate: Date?
     @Binding var isValidate: Bool?
     let validation: (() -> Bool)?
     @State var font: Font = AppFonts.regular3
@@ -77,5 +77,5 @@ struct DateTextField: View {
 }
 
 #Preview {
-    DateTextField(placeholder: "Дата", date: .constant(nil), initialDate: Date.now, isValidate: .constant(nil), validation: nil)
+    DatePickerField(placeholder: "Дата", date: .constant(nil), initialDate: Date.now, isValidate: .constant(nil), validation: nil)
 }

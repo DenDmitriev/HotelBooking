@@ -27,8 +27,8 @@ extension String {
     }
     
     var isPassport: Bool {
-        let passportRegEx = "^(?!^0+$)[a-zA-Z0-9]{3,20}$"
-        let passportPredicate = NSPredicate(format:"SELF MATCHES %@", self)
+        let passportRegEx = "^(?!^0+$)[a-zA-Z0-9]{3,20}$" // https://regex101.com/r/UZpfLx/1
+        let passportPredicate = NSPredicate(format:"SELF MATCHES %@", passportRegEx)
         
         return passportPredicate.evaluate(with: self)
       }

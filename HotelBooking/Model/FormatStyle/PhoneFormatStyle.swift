@@ -1,17 +1,21 @@
 //
-//  FilterNumberPhone.swift
+//  PhoneFormatStyle.swift
 //  HotelBooking
 //
-//  Created by Denis Dmitriev on 16.12.2023.
+//  Created by Denis Dmitriev on 18.12.2023.
 //
 
+import Foundation
 
-import SwiftUI
-
-class FilterPhone: ObservableObject {
+struct PhoneFormatStyle: FormatStyle {
+//    enum Mask: String {
+//        case rus = "+X (XXX) XXX-XX-XX"
+//    }
     
-    static func format(with mask: String, phone: String) -> String {
-        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+    var mask = "+X (XXX) XXX-XX-XX"
+    
+    func format(_ value: String) -> String {
+        let numbers = value.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex
         
@@ -31,9 +35,12 @@ class FilterPhone: ObservableObject {
         }
         return result
     }
+}
+
+extension FormatStyle where Self == PhoneFormatStyle {
+    static var phone: PhoneFormatStyle { .init() }
     
-    static func format(phone: String) -> String {
-        let numbers = "+" + phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-        return numbers
-    }
+//    static func phone(mask: Self.Mask) -> PhoneFormatStyle {
+//        return .init(mask: mask.rawValue)
+//    }
 }
