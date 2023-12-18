@@ -26,13 +26,8 @@ struct ImageSlider: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .overlay(content: {
-            GeometryReader { geometry in
-                Color.clear
-                    .onAppear {
-                        size = geometry.size
-                    }
-            }
+        .readSize(onChange: { size in
+            self.size = size
         })
         .overlay(alignment: .bottom, content: {
             HStack(spacing: AppGrid.pt5, content: {

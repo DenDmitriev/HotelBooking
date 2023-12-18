@@ -41,7 +41,7 @@ struct WrapperTextField<Field>: View where Field : View {
         .overlay {
             if !(isValidate ?? true) {
                 RoundedRectangle(cornerRadius: AppGrid.pt10)
-                    .stroke(.red, lineWidth: 1)
+                    .fill(AppColors.error.opacity(0.15))
             }
         }
     }

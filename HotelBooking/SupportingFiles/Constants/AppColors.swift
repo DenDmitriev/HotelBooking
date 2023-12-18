@@ -15,4 +15,5 @@ struct AppColors {
     static let backgroundTag = Color("BackgroundTag")
     static let primaryTwo = Color("PrimaryTwo")
     static let seporator = Color("Seporator")
+    static let error = Color("Error")
 }

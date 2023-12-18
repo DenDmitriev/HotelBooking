@@ -68,6 +68,7 @@
 		95CC715D2B303D4E0002EF39 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC715C2B303D4E0002EF39 /* KeyboardAvoiding.swift */; };
 		95CC715F2B306F360002EF39 /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC715E2B306F360002EF39 /* DateTextField.swift */; };
 		95CC71612B30781E0002EF39 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC71602B30781E0002EF39 /* DateExtension.swift */; };
+		95CC71632B3093F90002EF39 /* PhoneFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC71622B3093F90002EF39 /* PhoneFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +134,7 @@
 		95CC715C2B303D4E0002EF39 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		95CC715E2B306F360002EF39 /* DateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
 		95CC71602B30781E0002EF39 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		95CC71622B3093F90002EF39 /* PhoneFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 			children = (
 				9575654F2B2C0E9300415531 /* PriceFormatStyle.swift */,
 				956E16E72B300D1C00261FD6 /* PhoneFormatStyle.swift */,
+				95CC71622B3093F90002EF39 /* PhoneFormatter.swift */,
 				956E16CA2B2E17E200261FD6 /* NumeralFormatStyle.swift */,
 			);
 			path = FormatStyle;
@@ -536,6 +539,7 @@
 				95CC715B2B3035250002EF39 /* ScreenSizePreferenceKey.swift in Sources */,
 				9575656C2B2CAC2F00415531 /* RoomView.swift in Sources */,
 				956E16DC2B2F310300261FD6 /* ReadSizeViewExtension.swift in Sources */,
+				95CC71632B3093F90002EF39 /* PhoneFormatter.swift in Sources */,
 				956E16B32B2D839900261FD6 /* PhoneTextFiled.swift in Sources */,
 				956E16C62B2E088700261FD6 /* StringExtension.swift in Sources */,
 				9575651B2B2B7E0100415531 /* HotelBookingApp.swift in Sources */,
