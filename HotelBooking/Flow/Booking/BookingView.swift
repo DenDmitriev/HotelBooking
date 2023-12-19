@@ -58,20 +58,18 @@ struct BookingView: View {
         .keyboardAvoiding(offset: AppGrid.pt32)
         .toolbar(content: {
             ToolbarItem(placement: .bottomBar) {
-                NavigationButton(
-                    title: "Оплатить \(booking.totalPrice().formatted(.price))",
-                    destination: ReceiptView()) {
-                        print("Pay did tap")
-                        print("---Customer---")
-                        print("👨‍💻", customer.isValid() ? customer : "customer not valid")
-                        print("---Tourists---")
-                        print("🧳", tourists.isValids)
-                    }
-                    .disabled(!isAllValid)
-                    .padding(.top, AppGrid.pt16)
-                    .onChange(of: validationables) {
-                        isAllValid = validationables.isValid
-                    }
+                WrapperButton(text: "Оплатить \(booking.totalPrice().formatted(.price))") {
+                    print("Pay did tap")
+                    print("---Customer---")
+                    print("👨‍💻", customer.isValid() ? customer : "customer not valid")
+                    print("---Tourists---")
+                    print("🧳", tourists.isValids)
+                }
+                .disabled(!isAllValid)
+                .padding(.top, AppGrid.pt16)
+                .onChange(of: validationables) {
+                    isAllValid = validationables.isValid
+                }
             }
         })
         .navigationTitle("Бронирование")
@@ -94,5 +92,7 @@ struct BookingView: View {
 }
 
 #Preview {
-    BookingView(booking: .placeholder)
+    NavigationStack {
+        BookingView(booking: .placeholder)
+    }
 }

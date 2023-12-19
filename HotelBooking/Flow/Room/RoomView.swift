@@ -11,6 +11,7 @@ struct RoomView: View {
     
     let room: Room
     @State var selectionImage: Int = .zero
+    @EnvironmentObject var coordinator: Coordinator<HotelRouter>
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppGrid.pt16) {
@@ -28,8 +29,9 @@ struct RoomView: View {
             PriceDescriptorView(price: room.price, descriptor: room.pricePer)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            NavigationButton(title: "Выбрать номер",
-                             destination: BookingView(booking: .placeholder))
+            WrapperButton(text: "Выбрать номер") {
+                coordinator.push(.booking(room: room))
+            }
         }
         .padding(AppGrid.pt16)
         .background(.background)
@@ -39,4 +41,5 @@ struct RoomView: View {
 
 #Preview {
     RoomView(room: Array<Room>.placeholder.first!)
+        .environmentObject(Coordinator<HotelRouter>())
 }

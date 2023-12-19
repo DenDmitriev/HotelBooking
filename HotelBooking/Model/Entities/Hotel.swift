@@ -62,3 +62,13 @@ extension Hotel {
         }
     }
 }
+
+extension Hotel: Equatable, Hashable {
+    static func == (lhs: Hotel, rhs: Hotel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

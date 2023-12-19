@@ -8,23 +8,33 @@
 import SwiftUI
 
 enum HotelRouter: NavigationRouter {
-    case rooms(hotel: String)
+    case hotel
+    case rooms(hotel: Hotel)
+    case booking(room: Room)
     
     var id: Self {
         self
     }
     
-    var title: String? {
+    var title: String {
         switch self {
+        case .hotel:
+            "Отель"
         case .rooms(let hotel):
-            hotel
+            hotel.name
+        case .booking:
+            "Бронирование"
         }
     }
     
     func view() -> some View {
         switch self {
+        case .hotel:
+            HotelView(hotel: .placeholder)
         case .rooms(let hotel):
-            RoomsView(rooms: .placeholder)
+            RoomsView(rooms: .placeholder, hotelName: hotel.name)
+        case .booking:
+            BookingView(booking: .placeholder)
         }
     }
 }
