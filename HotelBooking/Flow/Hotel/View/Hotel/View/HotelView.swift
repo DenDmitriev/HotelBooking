@@ -10,6 +10,7 @@ import SwiftUI
 struct HotelView: View {
     
     @EnvironmentObject var coordinator: Coordinator<HotelRouter>
+    @StateObject var viewModel: HotelViewModel
     let hotel: Hotel
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Environment(\.dismiss) private var dismiss
@@ -41,7 +42,7 @@ struct HotelView: View {
 
 #Preview("HotelView") {
     NavigationStack {
-        HotelView(hotel: .placeholder)
+        HotelView(viewModel: HotelViewModel(coordinator: Coordinator<HotelRouter>()), hotel: .placeholder)
             .navigationTitle("Отель")
             .navigationBarTitleDisplayMode(.inline)
     }

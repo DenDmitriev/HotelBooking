@@ -30,7 +30,7 @@ struct RoomView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             WrapperButton(text: "Выбрать номер") {
-                coordinator.push(.booking(room: room, coordinator: coordinator))
+                coordinator.push(.booking(room: room))
             }
         }
         .padding(AppGrid.pt16)

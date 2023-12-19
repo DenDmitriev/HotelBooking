@@ -13,5 +13,5 @@ protocol NavigationRouter: Hashable, Identifiable {
     var title: String { get }
     
     @ViewBuilder
-    func view() -> V
+    func view(coordinator: Coordinator<Self>) -> V
 }

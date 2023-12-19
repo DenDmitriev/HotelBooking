@@ -10,7 +10,7 @@ import Combine
 
 class BookingViewModel: ObservableObject {
     
-    @ObservedObject var coordinator: Coordinator<HotelRouter>
+    weak var coordinator: Coordinator<HotelRouter>?
     
     @Published var isCustomerValid: Bool?
     @Published var firstTouristIsValid: Bool?
@@ -33,6 +33,6 @@ class BookingViewModel: ObservableObject {
     }
     
     private func toReceive() {
-        coordinator.push(.receipt)
+        coordinator?.push(.receipt)
     }
 }

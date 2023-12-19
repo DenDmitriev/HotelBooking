@@ -54,8 +54,8 @@ class Coordinator<Router: NavigationRouter>: ObservableObject, Equatable, Hashab
     }
     
     @ViewBuilder
-    func build(_ route: Router) -> some View {
-        route.view()
+    func build(_ route: Router, coordinator: Coordinator) -> some View {
+        route.view(coordinator: coordinator)
     }
     
     static func == (lhs: Coordinator<Router>, rhs: Coordinator<Router>) -> Bool {
