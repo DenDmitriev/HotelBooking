@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddTouristView: View {
     
+    @Binding var tourists: [Tourist]
     @Binding var touristCount: Int
     
     var body: some View {
@@ -21,6 +22,7 @@ struct AddTouristView: View {
                 
                 WrapperButton(systemImage: "plus") {
                     withAnimation {
+                        tourists.append(Tourist(id: touristCount))
                         touristCount += 1
                     }
                 }
@@ -34,5 +36,5 @@ struct AddTouristView: View {
 }
 
 #Preview {
-    AddTouristView(touristCount: .constant(1))
+    AddTouristView(tourists: .constant([]), touristCount: .constant(1))
 }

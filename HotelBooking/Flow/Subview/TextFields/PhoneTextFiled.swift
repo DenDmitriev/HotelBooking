@@ -18,6 +18,9 @@ struct PhoneTextFiled: View {
     
     var body: some View {
         WrapperTextField(placeholder: placeholder, textField: textFiled, text: $phone, isValidate: $isValidate)
+            .onAppear {
+                phoneMasked = phone.formatted(.phone(mask: mask))
+            }
     }
     
     var textFiled: some View {
@@ -51,6 +54,9 @@ struct PhoneTextFiled: View {
             if isValidate != nil {
                 committed()
             }
+        }
+        .onChange(of: isValidate) {
+            committed()
         }
         .disableAutocorrection(true)
         .keyboardType(.numbersAndPunctuation)

@@ -10,6 +10,7 @@ import SwiftUI
 struct RoomsView: View {
     
     let rooms: [Room]
+    @State var hotelName: String
     
     var body: some View {
         ScrollView {
@@ -21,9 +22,13 @@ struct RoomsView: View {
             .padding(.vertical, AppGrid.pt8)
             .background(AppColors.backgroundList)
         }
+        .navigationTitle(hotelName)
     }
 }
 
 #Preview {
-    RoomsView(rooms: .placeholder)
+    NavigationStack {
+        RoomsView(rooms: .placeholder, hotelName: Hotel.placeholder.name)
+            .navigationBarTitleDisplayMode(.inline)
+    }
 }

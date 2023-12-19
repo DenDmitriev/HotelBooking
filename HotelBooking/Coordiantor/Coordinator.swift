@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-class Coordinator<Router: NavigationRouter>: ObservableObject {
+class Coordinator<Router: NavigationRouter>: ObservableObject, Equatable, Hashable {
+    
+    var id: UUID = UUID()
     
     @Published var path = NavigationPath()
     
@@ -54,5 +56,13 @@ class Coordinator<Router: NavigationRouter>: ObservableObject {
     @ViewBuilder
     func build(_ route: Router) -> some View {
         route.view()
+    }
+    
+    static func == (lhs: Coordinator<Router>, rhs: Coordinator<Router>) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

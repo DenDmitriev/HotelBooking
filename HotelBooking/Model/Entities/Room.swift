@@ -41,3 +41,13 @@ extension Array<Room> {
         }
     }
 }
+
+extension Room: Equatable, Hashable {
+    static func == (lhs: Room, rhs: Room) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

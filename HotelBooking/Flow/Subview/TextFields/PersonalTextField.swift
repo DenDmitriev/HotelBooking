@@ -20,10 +20,12 @@ struct PersonalTextField: View {
     
     var textFiled: some View {
         TextField(placeholder, text: $personal, onEditingChanged: { isFocused in
-            if isFocused {
-                changed()
-            } else {
-                committed()
+            if isValidate != nil {
+                if isFocused {
+                    changed()
+                } else {
+                    committed()
+                }
             }
         }) {
             committed()
@@ -32,6 +34,9 @@ struct PersonalTextField: View {
             if isValidate != nil {
                 committed()
             }
+        }
+        .onChange(of: isValidate) {
+            committed()
         }
     }
     

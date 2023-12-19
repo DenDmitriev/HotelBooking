@@ -10,7 +10,7 @@ import SwiftUI
 protocol NavigationRouter: Hashable, Identifiable {
     associatedtype V: View
     
-    var title: String? { get }
+    var title: String { get }
     
     @ViewBuilder
     func view() -> V

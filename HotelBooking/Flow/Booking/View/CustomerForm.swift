@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CustomerForm: View {
     enum Field: Hashable {
@@ -23,10 +24,6 @@ struct CustomerForm: View {
     @State private var isPhoneValid: Bool?
     
     @FocusState private var focusedField: Field?
-    
-    private var validationables: Set<Bool?> {
-        [isEmailValid, isPhoneValid]
-    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppGrid.pt16) {
@@ -54,11 +51,22 @@ struct CustomerForm: View {
                     focusedField = nil
                 }
             }
-            .onChange(of: validationables) {
-                self.isValid = validationables.isValid
+            .onChange(of: [isPhoneValid, isEmailValid]) { oldValue, newValue in
+                guard isValid != nil else { return }
+                let isValid = newValue.isValid
+                if self.isValid != isValid {
+                    self.isValid = isValid
+                }
+            }
+            .onChange(of: isValid) {
+                guard let isValid else { return }
+                if !isValid {
+                    isEmailValid = false
+                    isPhoneValid = false
+                }
             }
             
-            Text("Эти данные никому не передаются. После оплаты мы вышлtv чек на указанный вами номер и почту")
+            Text("Эти данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту")
                 .font(AppFonts.regular2)
                 .foregroundStyle(AppColors.grayOne)
         }

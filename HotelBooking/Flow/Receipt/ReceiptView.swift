@@ -10,6 +10,7 @@ import SwiftUI
 struct ReceiptView: View {
     
     let orderNumber = String(Int.random(in: 100000...999999))
+    @EnvironmentObject var coordinator: Coordinator<HotelRouter>
     
     var body: some View {
         VStack(spacing: AppGrid.pt32) {
@@ -37,19 +38,20 @@ struct ReceiptView: View {
         .background(.background)
         .toolbar(content: {
             ToolbarItem(placement: .bottomBar) {
-                NavigationButton(
-                    title: "Супер!",
-                    destination: EmptyView()) {
-                        
-                    }
-                    .padding(.top, AppGrid.pt16)
+                WrapperButton(text: "Супер!") {
+                    coordinator.popToRoot()
+                }
+                .padding(.top, AppGrid.pt16)
             }
         })
-        .navigationTitle("Заказ оплачен")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    ReceiptView()
+    NavigationStack {
+        ReceiptView()
+            .environmentObject(Coordinator<HotelRouter>())
+            .navigationTitle("Заказ оплачен")
+            .navigationBarTitleDisplayMode(.inline)
+    }
 }

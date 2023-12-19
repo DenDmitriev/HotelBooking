@@ -33,6 +33,9 @@ struct EmailTextField: View {
                 committed()
             }
         }
+        .onChange(of: isValidate) {
+            committed()
+        }
         .disableAutocorrection(true)
         .keyboardType(.emailAddress)
         .onReceive(Just(email)) { newValue in

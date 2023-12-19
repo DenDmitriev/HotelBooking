@@ -13,8 +13,9 @@ struct TouristForm: View {
     }
     
     @Binding var tourist: Tourist
-    @Binding var isValid: Bool
-    @State  var number: Int
+    
+    /// Обозначает все ли данные верны
+    @Binding var isValid: Bool?
     
     @State private var isShow: Bool = true
     
@@ -38,19 +39,10 @@ struct TouristForm: View {
     
     @FocusState private var focusedField: FocusedField?
     
-    private var validationables: Set<Bool?> {
-        [nameIsValidate,
-         surnameIsValidate,
-         dateOfBirthIsValidate,
-         citizenshipIsValidate,
-         intPassportIsValidate,
-         intPassportEndDateIsValidate]
-    }
-    
     var body: some View {
         VStack(alignment: .leading, spacing: AppGrid.pt16) {
             HStack {
-                Text((number + 1).formatted(.numeral) + " турист")
+                Text((tourist.id + 1).formatted(.numeral) + " турист")
                     .font(AppFonts.title2)
                 
                 Spacer()
@@ -65,16 +57,15 @@ struct TouristForm: View {
             
             if isShow {
                 PersonalTextField(placeholder: "Имя", personal: $name, isValidate: $nameIsValidate) {
-                    2...99 ~= name.count
+                    name.isPersonName
                 }
                 .focused($focusedField, equals: .name)
                 .onChange(of: name) {
                     tourist.name = name
-                    print(tourist.name)
                 }
                 
                 PersonalTextField(placeholder: "Фамилия", personal: $surname, isValidate: $surnameIsValidate) {
-                    2...99 ~= surname.count
+                    surname.isPersonName
                 }
                 .focused($focusedField, equals: .surname)
                 .onChange(of: surname) {
@@ -93,7 +84,7 @@ struct TouristForm: View {
                 }
                 
                 PersonalTextField(placeholder: "Гражданство", personal: $citizenship, isValidate: $citizenshipIsValidate) {
-                    2...99 ~= citizenship.count
+                    citizenship.isCharacters
                 }
                 .focused($focusedField, equals: .citizenship)
                 .onChange(of: citizenship) {
@@ -103,6 +94,7 @@ struct TouristForm: View {
                 PersonalTextField(placeholder: "Номер загранпаспорта", personal: $intPassport, isValidate: $intPassportIsValidate) {
                     intPassport.isPassport
                 }
+                .disableAutocorrection(true)
                 .focused($focusedField, equals: .internationalPassport)
                 .onChange(of: intPassport) {
                     tourist.intPassport = intPassport
@@ -138,12 +130,37 @@ struct TouristForm: View {
         .padding(AppGrid.pt16)
         .background(.background)
         .cornerRadius(AppGrid.pt15)
-        .onChange(of: validationables) {
-            self.isValid = validationables.isValid
+        .onChange(of: [nameIsValidate,
+                       surnameIsValidate,
+                       dateOfBirthIsValidate,
+                       citizenshipIsValidate,
+                       intPassportIsValidate,
+                       intPassportEndDateIsValidate]) { oldValue, newValue in
+            guard isValid != nil else { return }
+            let isValid = newValue.isValid
+            if self.isValid != isValid {
+                self.isValid = isValid
+            }
+        }
+        .onChange(of: isValid) {
+            guard let isValid else { return }
+            if !isValid {
+                nameIsValidate = false
+                surnameIsValidate = false
+                dateOfBirthIsValidate = false
+                citizenshipIsValidate = false
+                intPassportIsValidate = false
+                intPassportEndDateIsValidate = false
+            }
         }
     }
 }
 
 #Preview {
-    TouristForm(tourist: .constant(.init(id: 1)), isValid: .constant(false), number: 1)
+    @State var checkValid: Bool = false
+    @State var touristIsValid: Bool? = false
+    
+    return Group {
+        TouristForm(tourist: .constant(.init(id: 1)), isValid: $touristIsValid)
+    }
 }

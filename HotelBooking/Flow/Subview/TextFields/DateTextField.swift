@@ -42,6 +42,9 @@ struct DateTextField: View {
                 committed()
             }
         }
+        .onChange(of: isValidate) {
+            committed()
+        }
         .keyboardType(.numbersAndPunctuation)
     }
     
