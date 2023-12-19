@@ -14,7 +14,6 @@ class PhoneFormatter: Formatter {
     }
 
     override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
-        print("in getObjectValue(), string = \(string)")
         obj?.pointee = string.formatted(.phone) as AnyObject
         return true
     }

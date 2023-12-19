@@ -44,8 +44,6 @@ struct ReceiptView: View {
                 .padding(.top, AppGrid.pt16)
             }
         })
-        .navigationTitle("Заказ оплачен")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -53,5 +51,7 @@ struct ReceiptView: View {
     NavigationStack {
         ReceiptView()
             .environmentObject(Coordinator<HotelRouter>())
+            .navigationTitle("Заказ оплачен")
+            .navigationBarTitleDisplayMode(.inline)
     }
 }

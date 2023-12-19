@@ -10,7 +10,8 @@ import SwiftUI
 enum HotelRouter: NavigationRouter {
     case hotel
     case rooms(hotel: Hotel)
-    case booking(room: Room)
+    case booking(room: Room, coordinator: Coordinator<HotelRouter>)
+    case receipt
     
     var id: Self {
         self
@@ -24,6 +25,8 @@ enum HotelRouter: NavigationRouter {
             hotel.name
         case .booking:
             "Бронирование"
+        case .receipt:
+            "Заказ оплачен"
         }
     }
     
@@ -33,8 +36,10 @@ enum HotelRouter: NavigationRouter {
             HotelView(hotel: .placeholder)
         case .rooms(let hotel):
             RoomsView(rooms: .placeholder, hotelName: hotel.name)
-        case .booking:
-            BookingView(booking: .placeholder)
+        case .booking(_, let coordinator):
+            BookingView(booking: .placeholder, viewModel: BookingViewModel(coordinator: coordinator))
+        case .receipt:
+            ReceiptView()
         }
     }
 }
