@@ -15,7 +15,6 @@ struct TouristForm: View {
     @Binding var tourist: Tourist
     @Binding var isValid: Bool
     @State  var number: Int
-    @State var scrollReader: ScrollViewProxy?
     
     @State private var isShow: Bool = true
     
@@ -146,5 +145,5 @@ struct TouristForm: View {
 }
 
 #Preview {
-    TouristForm(tourist: .constant(.init(id: 1)), isValid: .constant(false), number: 1, scrollReader: nil)
+    TouristForm(tourist: .constant(.init(id: 1)), isValid: .constant(false), number: 1)
 }

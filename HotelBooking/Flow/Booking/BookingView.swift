@@ -25,45 +25,42 @@ struct BookingView: View {
     }
     
     var body: some View {
-        ScrollViewReader { scrollReader in
-            ScrollView {
-                LazyVStack(spacing: AppGrid.pt8) {
-                    BookingHotel(booking: booking)
-                    
-                    BookingInfo(booking: booking)
-                    
-                    CustomerForm(customer: $customer, isValid: $isCustomerValid)
-                    
-                    LazyVStack {
-                        ForEach(0...tourists.index(before: touristCount), id: \.self) { index in
-                            TouristForm(
-                                tourist: touristWrapper(tourist: tourists.first(where: { $0.id == index }) ?? Tourist(id: index)),
-                                isValid: index == 0 ? $firstTouristISValid : .constant(true),
-                                number: index,
-                                scrollReader: scrollReader
-                            )
-                        }
+        ScrollView {
+            LazyVStack(spacing: AppGrid.pt8) {
+                BookingHotel(booking: booking)
+                
+                BookingInfo(booking: booking)
+                
+                CustomerForm(customer: $customer, isValid: $isCustomerValid)
+                
+                LazyVStack {
+                    ForEach(0...tourists.index(before: touristCount), id: \.self) { index in
+                        TouristForm(
+                            tourist: touristWrapper(tourist: tourists.first(where: { $0.id == index }) ?? Tourist(id: index)),
+                            isValid: index == 0 ? $firstTouristISValid : .constant(true),
+                            number: index
+                        )
                     }
-                    
-                    AddTouristView(touristCount: $touristCount)
-                    
-                    InvoiceView(
-                        tourPrice: booking.tourPrice,
-                        fuelCharge: booking.fuelCharge,
-                        serviceCharge: booking.serviceCharge,
-                        totalPrice: booking.totalPrice()
-                    )
                 }
-                .padding(.vertical, AppGrid.pt8)
-                .background(AppColors.backgroundList)
+                
+                AddTouristView(touristCount: $touristCount)
+                
+                InvoiceView(
+                    tourPrice: booking.tourPrice,
+                    fuelCharge: booking.fuelCharge,
+                    serviceCharge: booking.serviceCharge,
+                    totalPrice: booking.totalPrice()
+                )
             }
-            .keyboardAvoiding(offset: AppGrid.pt32)
+            .padding(.vertical, AppGrid.pt8)
+            .background(AppColors.backgroundList)
         }
+        .keyboardAvoiding(offset: AppGrid.pt32)
         .toolbar(content: {
             ToolbarItem(placement: .bottomBar) {
                 NavigationButton(
                     title: "Оплатить \(booking.totalPrice().formatted(.price))",
-                    destination: EmptyView()) {
+                    destination: ReceiptView()) {
                         print("Pay did tap")
                         print("---Customer---")
                         print("👨‍💻", customer.isValid() ? customer : "customer not valid")
@@ -79,8 +76,6 @@ struct BookingView: View {
         })
         .navigationTitle("Бронирование")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.pink, for: .bottomBar)
-        
     }
     
     private func touristWrapper(tourist: Tourist) -> Binding<Tourist> {
