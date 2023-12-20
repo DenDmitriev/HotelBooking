@@ -10,7 +10,7 @@ import SwiftUI
 struct ReceiptView: View {
     
     let orderNumber = String(Int.random(in: 100000...999999))
-    @EnvironmentObject var coordinator: Coordinator<HotelRouter>
+    @EnvironmentObject var coordinator: AppCoordinator
     
     var body: some View {
         VStack(spacing: AppGrid.pt32) {
@@ -50,7 +50,7 @@ struct ReceiptView: View {
 #Preview {
     NavigationStack {
         ReceiptView()
-            .environmentObject(Coordinator<HotelRouter>())
+            .environmentObject(AppCoordinator())
             .navigationTitle("Заказ оплачен")
             .navigationBarTitleDisplayMode(.inline)
     }

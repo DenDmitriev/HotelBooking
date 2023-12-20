@@ -13,7 +13,7 @@ extension String {
     /// Person's name (first, last, or both) in any letter case. Although not perfect,
     /// this expression will filter out many incorrect name formats (especially numerics and invalid special characters).
     var isPersonName: Bool {
-        let personNameRexEx = "^[a-zA-Z]+(([\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$"
+        let personNameRexEx = "^([a-zA-Z '-]+)$"
         let personNamePredicate = NSPredicate(format:"SELF MATCHES %@", personNameRexEx)
         return personNamePredicate.evaluate(with: self)
     }

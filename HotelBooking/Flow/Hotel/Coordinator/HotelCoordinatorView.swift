@@ -7,17 +7,20 @@
 
 import SwiftUI
 
-struct HotelCoordinator: View {
+struct HotelCoordinatorView: View {
     
-    @StateObject var coordinator: Coordinator<HotelRouter>
+    @StateObject var coordinator: AppCoordinator
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            coordinator.build(.hotel)
+            coordinator.build(.hotel, coordinator: coordinator)
                 .navigationTitle(HotelRouter.hotel.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: HotelRouter.self) { route in
-                    coordinator.build(route)
+                    coordinator.build(route, coordinator: coordinator)
+                }
+                .alert(isPresented: $coordinator.hasError, error: coordinator.error ?? AppError.unknown) {
+                    Button("OK") { }
                 }
         }
         .accentColor(.primary)
@@ -26,5 +29,5 @@ struct HotelCoordinator: View {
 }
 
 #Preview("HotelCoordinator") {
-    HotelCoordinator(coordinator: Coordinator<HotelRouter>())
+    HotelCoordinatorView(coordinator: AppCoordinator())
 }
