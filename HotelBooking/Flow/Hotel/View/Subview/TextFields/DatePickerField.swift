@@ -48,9 +48,9 @@ struct DatePickerField: View {
             .labelsHidden()
             .opacity(0.011)
         }
-        .onChange(of: date, {
+        .onChange(of: date) { _ in
             committed()
-        })
+        }
         .frame(maxWidth: .infinity, alignment: .leading)
         .frame(height: AppGrid.pt52)
         .padding(.horizontal, AppGrid.pt16)

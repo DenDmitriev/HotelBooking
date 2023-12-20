@@ -41,7 +41,7 @@ struct BookingView: View {
                         }
                         
                         AddTouristView(tourists: $tourists, touristCount: $touristCount)
-                            .onChange(of: touristCount) {
+                            .onChange(of: touristCount) { _ in
                                 if let tourist = tourists.last {
                                     withAnimation {
                                         scrollReader.scrollTo(tourist.id, anchor: .top)
@@ -58,6 +58,9 @@ struct BookingView: View {
                     }
                     .padding(.vertical, AppGrid.pt8)
                     .background(AppColors.backgroundList)
+                }
+                .onTapGesture {
+                    hideKeyboard()
                 }
             } else {
                 Placeholder(style: .loading(text: "Загрузка бронирования"))

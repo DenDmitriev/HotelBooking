@@ -37,13 +37,20 @@ struct DateTextField: View {
         }) {
             committed()
         }
-        .onChange(of: date) {
+        .onChange(of: date) { _ in
             if isValidate != nil {
                 committed()
             }
         }
-        .onChange(of: isValidate) {
+        .onChange(of: isValidate) { _ in
             committed()
+        }
+        .onAppear {
+            if date == nil {
+                tempText = ""
+            } else {
+                tempText = "temp"
+            }
         }
         .keyboardType(.numbersAndPunctuation)
     }

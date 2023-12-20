@@ -21,6 +21,6 @@ struct TagItem: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
+#Preview {
     TagItem(text: Hotel.placeholder.aboutTheHotel.peculiarities.first ?? "3-я линия")
 }

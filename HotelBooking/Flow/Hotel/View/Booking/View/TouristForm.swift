@@ -60,7 +60,7 @@ struct TouristForm: View {
                     name.isPersonName
                 }
                 .focused($focusedField, equals: .name)
-                .onChange(of: name) {
+                .onChange(of: name) { name in
                     tourist.name = name
                 }
                 
@@ -68,7 +68,7 @@ struct TouristForm: View {
                     surname.isPersonName
                 }
                 .focused($focusedField, equals: .surname)
-                .onChange(of: surname) {
+                .onChange(of: surname) { surname in
                     tourist.surname = surname
                 }
                 
@@ -77,7 +77,7 @@ struct TouristForm: View {
                     (dateOfBirth ?? Date.now).isPersonExistingToday
                 }
                 .focused($focusedField, equals: .dateOfBirth)
-                .onChange(of: dateOfBirth) {
+                .onChange(of: dateOfBirth) { dateOfBirth in
                     if let dateOfBirth {
                         tourist.dateOfBirth = dateOfBirth
                     }
@@ -87,7 +87,7 @@ struct TouristForm: View {
                     citizenship.isCharacters
                 }
                 .focused($focusedField, equals: .citizenship)
-                .onChange(of: citizenship) {
+                .onChange(of: citizenship) { citizenship in
                     tourist.citizenship = citizenship
                 }
                 
@@ -96,7 +96,7 @@ struct TouristForm: View {
                 }
                 .disableAutocorrection(true)
                 .focused($focusedField, equals: .internationalPassport)
-                .onChange(of: intPassport) {
+                .onChange(of: intPassport) { intPassport in
                     tourist.intPassport = intPassport
                 }
                 
@@ -105,7 +105,7 @@ struct TouristForm: View {
                     (intPassportEndDate ?? .now).isValidIntPassportForFlight
                 }
                 .focused($focusedField, equals: .internationalPassportEndDate)
-                .onChange(of: intPassportEndDate) {
+                .onChange(of: intPassportEndDate) { intPassportEndDate in
                     if let intPassportEndDate {
                         tourist.intPassportEndDate = intPassportEndDate
                     }
@@ -135,14 +135,14 @@ struct TouristForm: View {
                        dateOfBirthIsValidate,
                        citizenshipIsValidate,
                        intPassportIsValidate,
-                       intPassportEndDateIsValidate]) { oldValue, newValue in
-            guard isValid != nil else { return }
+                       intPassportEndDateIsValidate]) { newValue in
+            guard self.isValid != nil else { return }
             let isValid = newValue.isValid
             if self.isValid != isValid {
                 self.isValid = isValid
             }
         }
-        .onChange(of: isValid) {
+        .onChange(of: isValid) { isValid in
             guard let isValid else { return }
             if !isValid {
                 nameIsValidate = false

@@ -30,12 +30,12 @@ struct PersonalTextField: View {
         }) {
             committed()
         }
-        .onChange(of: personal) {
+        .onChange(of: personal) { _ in
             if isValidate != nil {
                 committed()
             }
         }
-        .onChange(of: isValidate) {
+        .onChange(of: isValidate) { _ in
             committed()
         }
     }
