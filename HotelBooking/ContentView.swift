@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var coordinator: Coordinator = Coordinator<HotelRouter>()
+    @StateObject var coordinator = AppCoordinator()
     
     var body: some View {
-        HotelCoordinator(coordinator: coordinator)
+        HotelCoordinatorView(coordinator: coordinator)
     }
 }
 

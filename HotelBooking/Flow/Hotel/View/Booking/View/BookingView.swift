@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BookingView: View {
     
-    let booking: Booking
+    @State var booking: Booking?
     
-    @EnvironmentObject var coordinator: Coordinator<HotelRouter>
+    @EnvironmentObject var coordinator: AppCoordinator
     @StateObject var viewModel: BookingViewModel
     
     @State var customer: Customer = .init()
@@ -20,52 +20,66 @@ struct BookingView: View {
     
     var body: some View {
         ScrollViewReader { scrollReader in
-            ScrollView {
-                LazyVStack(spacing: AppGrid.pt8) {
-                    BookingHotel(booking: booking)
-                    
-                    BookingInfo(booking: booking)
-                    
-                    CustomerForm(customer: $customer, isValid: $viewModel.isCustomerValid)
-                    
-                    VStack {
-                        ForEach(tourists) { tourist in
-                            let isFirstTourist = tourist.id == 0
-                            TouristForm(
-                                tourist: touristWrapper(tourist: tourist),
-                                isValid: isFirstTourist ? $viewModel.firstTouristIsValid : .constant(nil)
-                            )
-                            .id(tourist.id)
-                        }
-                    }
-                    
-                    AddTouristView(tourists: $tourists, touristCount: $touristCount)
-                        .onChange(of: touristCount) {
-                            if let tourist = tourists.last {
-                                withAnimation {
-                                    scrollReader.scrollTo(tourist.id, anchor: .top)
-                                }
+            if let booking {
+                ScrollView {
+                    LazyVStack(spacing: AppGrid.pt8) {
+                        BookingHotel(booking: booking)
+                        
+                        BookingInfo(booking: booking)
+                        
+                        CustomerForm(customer: $customer, isValid: $viewModel.isCustomerValid)
+                        
+                        VStack {
+                            ForEach(tourists) { tourist in
+                                let isFirstTourist = tourist.id == 0
+                                TouristForm(
+                                    tourist: touristWrapper(tourist: tourist),
+                                    isValid: isFirstTourist ? $viewModel.firstTouristIsValid : .constant(nil)
+                                )
+                                .id(tourist.id)
                             }
                         }
-                    
-                    InvoiceView(
-                        tourPrice: booking.tourPrice,
-                        fuelCharge: booking.fuelCharge,
-                        serviceCharge: booking.serviceCharge,
-                        totalPrice: booking.totalPrice()
-                    )
+                        
+                        AddTouristView(tourists: $tourists, touristCount: $touristCount)
+                            .onChange(of: touristCount) {
+                                if let tourist = tourists.last {
+                                    withAnimation {
+                                        scrollReader.scrollTo(tourist.id, anchor: .top)
+                                    }
+                                }
+                            }
+                        
+                        InvoiceView(
+                            tourPrice: booking.tourPrice,
+                            fuelCharge: booking.fuelCharge,
+                            serviceCharge: booking.serviceCharge,
+                            totalPrice: booking.totalPrice()
+                        )
+                    }
+                    .padding(.vertical, AppGrid.pt8)
+                    .background(AppColors.backgroundList)
                 }
-                .padding(.vertical, AppGrid.pt8)
-                .background(AppColors.backgroundList)
+            } else {
+                Placeholder(style: .loading(text: "Загрузка бронирования"))
             }
         }
         .keyboardAvoiding(offset: AppGrid.pt32)
+        .onAppear {
+            Task {
+                await viewModel.getBooking()
+            }
+        }
+        .onReceive(viewModel.$booking) { booking in
+            self.booking = booking
+        }
         .toolbar(content: {
-            ToolbarItem(placement: .bottomBar) {
-                WrapperButton(text: "Оплатить \(booking.totalPrice().formatted(.price))") {
-                    viewModel.payDidTap(customer: customer, tourists: tourists)
+            if let booking {
+                ToolbarItem(placement: .bottomBar) {
+                    WrapperButton(text: "Оплатить \(booking.totalPrice().formatted(.price))") {
+                        viewModel.payDidTap(customer: customer, tourists: tourists)
+                    }
+                    .padding(.top, AppGrid.pt16)
                 }
-                .padding(.top, AppGrid.pt16)
             }
         })
         .navigationTitle("Бронирование")
@@ -87,7 +101,7 @@ struct BookingView: View {
 }
 
 #Preview {
-    let coordinator = Coordinator<HotelRouter>()
+    let coordinator = AppCoordinator()
     return NavigationStack {
         BookingView(booking: .placeholder, viewModel: BookingViewModel(coordinator: coordinator))
             .environmentObject(coordinator)

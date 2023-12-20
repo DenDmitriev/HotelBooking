@@ -30,14 +30,14 @@ enum HotelRouter: NavigationRouter {
         }
     }
     
-    func view(coordinator: Coordinator<HotelRouter>) -> some View {
+    func view(coordinator: AppCoordinator) -> some View {
         switch self {
         case .hotel:
-            HotelView(viewModel: HotelViewModel(coordinator: coordinator), hotel: .placeholder)
+            HotelView(viewModel: HotelViewModel(coordinator: coordinator))
         case .rooms(let hotel):
-            RoomsView(rooms: .placeholder, hotelName: hotel.name)
+            RoomsView(hotelName: hotel.name, viewModel: RoomsViewModel(coordinator: coordinator))
         case .booking:
-            BookingView(booking: .placeholder, viewModel: BookingViewModel(coordinator: coordinator))
+            BookingView(viewModel: BookingViewModel(coordinator: coordinator))
         case .receipt:
             ReceiptView()
         }

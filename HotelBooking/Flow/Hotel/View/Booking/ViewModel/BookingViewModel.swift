@@ -9,15 +9,25 @@ import SwiftUI
 import Combine
 
 class BookingViewModel: ObservableObject {
+    weak var coordinator: AppCoordinator?
     
-    weak var coordinator: Coordinator<HotelRouter>?
-    
+    @Published var booking: Booking?
     @Published var isCustomerValid: Bool?
     @Published var firstTouristIsValid: Bool?
 
     
-    init(coordinator: Coordinator<HotelRouter>) {
+    init(coordinator: AppCoordinator) {
         self.coordinator = coordinator
+    }
+    
+    func getBooking() async {
+        let bookingResult = await HotelService.getBooking()
+        switch bookingResult {
+        case .success(let booking):
+            update(booking: booking)
+        case .failure(let failure):
+            showError(error: failure as? LocalizedError)
+        }
     }
     
     func payDidTap(customer: Customer, tourists: [Tourist]) {
@@ -29,6 +39,18 @@ class BookingViewModel: ObservableObject {
         } else {
             isCustomerValid = false
             firstTouristIsValid = false
+        }
+    }
+    
+    private func update(booking: Booking) {
+        DispatchQueue.main.async {
+            self.booking = booking
+        }
+    }
+    
+    private func showError(error: LocalizedError?) {
+        DispatchQueue.main.async {
+            self.coordinator?.presentAlert(error: AppError.map(error: error))
         }
     }
     

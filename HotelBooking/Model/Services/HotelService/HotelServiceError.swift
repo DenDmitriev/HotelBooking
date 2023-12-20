@@ -17,8 +17,8 @@ enum HotelServiceError: LocalizedError {
         switch self {
         case .unknown:
             return String(localized: "Unknown error", comment: "Error")
-        case .urlFailure(let url):
-            return String(localized: "\(url) fail", comment: "Error")
+        case .urlFailure:
+            return String(localized: "URL error", comment: "Error")
         case .responseFailure:
             return String(localized: "Response failure", comment: "Error")
         case .map(let description):

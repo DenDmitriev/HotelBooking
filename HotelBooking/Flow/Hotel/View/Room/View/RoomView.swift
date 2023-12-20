@@ -11,7 +11,7 @@ struct RoomView: View {
     
     let room: Room
     @State var selectionImage: Int = .zero
-    @EnvironmentObject var coordinator: Coordinator<HotelRouter>
+    @EnvironmentObject var coordinator: AppCoordinator
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppGrid.pt16) {
@@ -41,5 +41,5 @@ struct RoomView: View {
 
 #Preview {
     RoomView(room: Array<Room>.placeholder.first!)
-        .environmentObject(Coordinator<HotelRouter>())
+        .environmentObject(AppCoordinator())
 }

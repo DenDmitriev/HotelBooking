@@ -7,62 +7,31 @@
 
 import SwiftUI
 
-class Coordinator<Router: NavigationRouter>: ObservableObject, Equatable, Hashable {
+protocol Coordinator: AnyObject, ObservableObject {
+    associatedtype Router: NavigationRouter
+    associatedtype Content: View
+    associatedtype Error: LocalizedError
     
-    var id: UUID = UUID()
+    var type: Router { get }
     
-    @Published var path = NavigationPath()
+    var path: NavigationPath { get set }
+    var sheet: Router? { get set }
+    var cover: Router? { get set }
     
-    @Published var sheet: Router?
-    @Published var cover: Router?
+    var hasError: Bool { get set }
+    var error: Error? { get set }
     
-    @Published var hasError: Bool = false
+    func push(_ page: Router)
+    func pop()
+    func popToRoot()
     
-    var error: LocalizedError?
+    func present(sheet: Router)
+    func dismissSheet()
     
-    func push(_ page: Router) {
-        path.append(page)
-    }
+    func present(cover: Router)
+    func dismissCover()
     
-    func pop() {
-        path.removeLast()
-    }
-    
-    func popToRoot() {
-        path.removeLast(path.count)
-    }
-    
-    func present(sheet: Router) {
-        self.sheet = sheet
-    }
-    
-    func dismissSheet() {
-        sheet = nil
-    }
-    
-    func present(cover: Router) {
-        self.cover = cover
-    }
-    
-    func dismissCover() {
-        cover = nil
-    }
-    
-    func presentAlert(error: LocalizedError) {
-        self.error = error
-        hasError = true
-    }
-    
-    @ViewBuilder
-    func build(_ route: Router, coordinator: Coordinator) -> some View {
-        route.view(coordinator: coordinator)
-    }
-    
-    static func == (lhs: Coordinator<Router>, rhs: Coordinator<Router>) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    func presentAlert(error: Error)
+
+    @ViewBuilder func build(_ route: Router, coordinator: Self) -> Content
 }

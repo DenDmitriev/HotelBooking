@@ -8,10 +8,10 @@
 import SwiftUI
 
 protocol NavigationRouter: Hashable, Identifiable {
-    associatedtype V: View
+    associatedtype Content: View
+    associatedtype C: Coordinator
     
     var title: String { get }
     
-    @ViewBuilder
-    func view(coordinator: Coordinator<Self>) -> V
+    @ViewBuilder func view(coordinator: C) -> Content
 }
