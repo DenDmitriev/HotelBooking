@@ -28,12 +28,12 @@ struct EmailTextField: View {
         }) {
             committed()
         }
-        .onChange(of: email) {
+        .onChange(of: email) { _ in
             if isValidate != nil {
                 committed()
             }
         }
-        .onChange(of: isValidate) {
+        .onChange(of: isValidate) { _ in
             committed()
         }
         .disableAutocorrection(true)

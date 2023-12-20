@@ -67,6 +67,6 @@ struct TagsView: View {
     }
 }
 
-#Preview("Tags View", traits: .fixedLayout(width: 350, height: 500)) {
+#Preview("Tags View") {
     TagsView(tags: Hotel.placeholder.aboutTheHotel.peculiarities)
 }

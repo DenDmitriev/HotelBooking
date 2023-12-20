@@ -14,6 +14,7 @@
 		954A4ECE2B329C2900FB6A4D /* AppCooordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A4ECD2B329C2900FB6A4D /* AppCooordinator.swift */; };
 		954A4ED02B32B1A300FB6A4D /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A4ECF2B32B1A300FB6A4D /* AppError.swift */; };
 		954A4ED22B32B99000FB6A4D /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A4ED12B32B99000FB6A4D /* Placeholder.swift */; };
+		954A4ED42B32D96D00FB6A4D /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A4ED32B32D96D00FB6A4D /* ViewExtension.swift */; };
 		956E16A92B2D71DB00261FD6 /* BookingHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E16A82B2D71DB00261FD6 /* BookingHotel.swift */; };
 		956E16AB2B2D72EF00261FD6 /* BookingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E16AA2B2D72EF00261FD6 /* BookingInfo.swift */; };
 		956E16AD2B2D798200261FD6 /* AppFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E16AC2B2D798200261FD6 /* AppFormatter.swift */; };
@@ -88,6 +89,7 @@
 		954A4ECD2B329C2900FB6A4D /* AppCooordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCooordinator.swift; sourceTree = "<group>"; };
 		954A4ECF2B32B1A300FB6A4D /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		954A4ED12B32B99000FB6A4D /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		954A4ED32B32D96D00FB6A4D /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		956E16A82B2D71DB00261FD6 /* BookingHotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHotel.swift; sourceTree = "<group>"; };
 		956E16AA2B2D72EF00261FD6 /* BookingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingInfo.swift; sourceTree = "<group>"; };
 		956E16AC2B2D798200261FD6 /* AppFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFormatter.swift; sourceTree = "<group>"; };
@@ -241,6 +243,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		954A4ED52B32DC2500FB6A4D /* Placeholder */ = {
+			isa = PBXGroup;
+			children = (
+				954A4ED12B32B99000FB6A4D /* Placeholder.swift */,
+			);
+			path = Placeholder;
+			sourceTree = "<group>";
+		};
 		956E16B62B2D909A00261FD6 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,7 +273,7 @@
 				956E16EC2B30211B00261FD6 /* ImageSlider */,
 				956E16DA2B2F1D5C00261FD6 /* Buttons */,
 				956E16B62B2D909A00261FD6 /* TextFields */,
-				954A4ED12B32B99000FB6A4D /* Placeholder.swift */,
+				954A4ED52B32DC2500FB6A4D /* Placeholder */,
 			);
 			path = Subview;
 			sourceTree = "<group>";
@@ -466,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				957565622B2C80BB00415531 /* EdgeBorder.swift */,
+				954A4ED32B32D96D00FB6A4D /* ViewExtension.swift */,
 				954A4EBD2B319EE100FB6A4D /* ArrayBoolExtension.swift */,
 				95CC71602B30781E0002EF39 /* DateExtension.swift */,
 				956E16C52B2E088700261FD6 /* StringExtension.swift */,
@@ -645,6 +656,7 @@
 				95CC71742B3157200002EF39 /* HotelCoordinatorView.swift in Sources */,
 				957565562B2C143E00415531 /* HotelAboutView.swift in Sources */,
 				957565452B2B938600415531 /* AppGrid.swift in Sources */,
+				954A4ED42B32D96D00FB6A4D /* ViewExtension.swift in Sources */,
 				957565372B2B899D00415531 /* Room.swift in Sources */,
 				956E16E62B2F599000261FD6 /* InvoiceView.swift in Sources */,
 				95CC71692B31535F0002EF39 /* Coordinator.swift in Sources */,
@@ -828,6 +840,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -859,6 +872,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

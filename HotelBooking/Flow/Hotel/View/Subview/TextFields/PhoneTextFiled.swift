@@ -33,7 +33,7 @@ struct PhoneTextFiled: View {
         }) {
             committed()
         }
-        .onChange(of: phoneMasked) {
+        .onChange(of: phoneMasked) { _ in
             // Применяем маску
             phoneMasked = phoneMasked.formatted(.phone(mask: mask))
             
@@ -50,12 +50,12 @@ struct PhoneTextFiled: View {
             // Убираем маску
             phone = PhoneFormatter.unformatted(phoneMasked)
         }
-        .onChange(of: phone) {
+        .onChange(of: phone) { _ in
             if isValidate != nil {
                 committed()
             }
         }
-        .onChange(of: isValidate) {
+        .onChange(of: isValidate) { _ in
             committed()
         }
         .disableAutocorrection(true)
@@ -69,6 +69,6 @@ struct PhoneTextFiled: View {
     private func changed() {}
 }
 
-#Preview("Phone text filed", traits: .sizeThatFitsLayout) {
+#Preview("Phone text filed") {
     PhoneTextFiled(phone: .constant(""), isValidate: .constant(nil))
 }

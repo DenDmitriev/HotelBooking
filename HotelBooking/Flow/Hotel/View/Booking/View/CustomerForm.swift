@@ -34,13 +34,13 @@ struct CustomerForm: View {
             VStack(spacing: AppGrid.pt8) {
                 PhoneTextFiled(phone: $phone, isValidate: $isPhoneValid)
                     .focused($focusedField, equals: .phone)
-                    .onChange(of: phone) {
+                    .onChange(of: phone) { _ in
                         customer.phone = phone
                     }
                 
                 EmailTextField(email: $email, isValidate: $isEmailValid)
                     .focused($focusedField, equals: .email)
-                    .onChange(of: email) {
+                    .onChange(of: email) { _ in
                         customer.email = email
                     }
             }
@@ -51,14 +51,14 @@ struct CustomerForm: View {
                     focusedField = nil
                 }
             }
-            .onChange(of: [isPhoneValid, isEmailValid]) { oldValue, newValue in
+            .onChange(of: [isPhoneValid, isEmailValid]) { newValue in
                 guard isValid != nil else { return }
                 let isValid = newValue.isValid
                 if self.isValid != isValid {
                     self.isValid = isValid
                 }
             }
-            .onChange(of: isValid) {
+            .onChange(of: isValid) { _ in
                 guard let isValid else { return }
                 if !isValid {
                     isEmailValid = false
