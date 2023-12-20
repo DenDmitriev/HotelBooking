@@ -4,9 +4,14 @@ Demo application for booking hotel services
 # Overview
 ## Video
 
-https://github.com/DenDmitriev/HotelBooking/assets/65191747/e8abc032-aad7-4714-9b05-5e6607653d9e
+| Overview App | Scenarios Inputs |
+| ----------- | ----------- |
+| <video src="https://github.com/DenDmitriev/HotelBooking/assets/65191747/ec1cdb3c-8131-4b70-9077-4b85a29e08ba">   | <video src="https://github.com/DenDmitriev/HotelBooking/assets/65191747/e8abc032-aad7-4714-9b05-5e6607653d9e">   |
 
-https://github.com/DenDmitriev/HotelBooking/assets/65191747/ec1cdb3c-8131-4b70-9077-4b85a29e08ba
+
+
+
+
 
 ## Screenshots
 <img width="250" alt="Отель" src="https://github.com/DenDmitriev/HotelBooking/assets/65191747/1acd7459-7b50-45c4-8de1-416146f84148">
